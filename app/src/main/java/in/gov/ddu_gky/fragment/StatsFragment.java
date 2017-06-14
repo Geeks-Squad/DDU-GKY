@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import in.gov.ddu_gky.R;
-import in.gov.ddu_gky.fragment.model.User;
+import in.gov.ddu_gky.model.User;
 
 
 /**

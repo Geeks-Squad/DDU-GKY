@@ -1,6 +1,6 @@
 package in.gov.ddu_gky.service;
 
-import in.gov.ddu_gky.fragment.model.User;
+import in.gov.ddu_gky.model.User;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

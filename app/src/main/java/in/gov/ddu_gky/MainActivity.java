@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import in.gov.ddu_gky.fragment.FeedbackFragment;
 import in.gov.ddu_gky.fragment.StatsFragment;
 import in.gov.ddu_gky.notification.broadcast_recievers.NotificationEventReceiver;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, fragment);
         ft.commit();
+
         NotificationEventReceiver.setupAlarm(getApplicationContext());
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -100,7 +102,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_queries) {
 
         } else if (id == R.id.nav_feedback) {
-
+            fragment = new FeedbackFragment();
         } else if (id == R.id.nav_faq) {
 
         }

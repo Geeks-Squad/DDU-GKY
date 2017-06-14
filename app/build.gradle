@@ -37,6 +37,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.0'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
     compile 'com.yqritc:recyclerview-multiple-viewtypes-adapter:1.1.0'
+
     // ----------------------------------
     //  Rx dependencies
     compile 'io.reactivex.rxjava2:rxjava:2.0.7'

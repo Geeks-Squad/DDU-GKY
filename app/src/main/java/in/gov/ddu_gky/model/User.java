@@ -1,4 +1,4 @@
-package in.gov.ddu_gky.fragment.model;
+package in.gov.ddu_gky.model;
 
 import java.io.Serializable;
 
