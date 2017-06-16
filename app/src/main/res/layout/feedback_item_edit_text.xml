@@ -23,10 +23,10 @@
             <TextView
                 android:id="@+id/text_question"
                 android:layout_width="match_parent"
-                android:layout_height="63dp"
+                android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="Sample Question"
-                android:textSize="30sp" />
+                android:textSize="20sp" />
 
 
             <EditText
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:ems="14"
                 android:inputType="none"
-                android:text="Enter Answer" />
+                android:hint="Enter Answer" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

@@ -1,7 +1,10 @@
 package in.gov.ddu_gky.feedback.adapter;
 
 import android.content.Context;
+import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +12,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import in.gov.ddu_gky.R;
+import in.gov.ddu_gky.feedback.handler.FeedbackHandler;
 import in.gov.ddu_gky.feedback.holder.EditTextHolder;
 import in.gov.ddu_gky.feedback.holder.RadioCheckHolder;
 import in.gov.ddu_gky.feedback.holder.ReportLocationHolder;
@@ -30,10 +33,12 @@ public class FeedbackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final int LOCATION = 0;
     private final int EDITTEXT = 1;
     private final int RADIOGROUP = 2;
+    private FeedbackHandler handler;
 
-    public FeedbackAdapter(ArrayList<Object> items, Context context) {
-        this.data = items;
+    public FeedbackAdapter(Context context, ArrayList<Object> items, FeedbackHandler handler) {
         this.context = context;
+        this.data = items;
+        this.handler = handler;
     }
 
     @Override
@@ -76,18 +81,46 @@ public class FeedbackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         switch (holder.getItemViewType()) {
             case LOCATION:
                 ReportLocationHolder reportLocationHolder = (ReportLocationHolder) holder;
+                reportLocationHolder.getLocationButton().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        handler.LocationClickListener();
+                    }
+                });
                 setupReportLocationHolder (reportLocationHolder, position);
                 break;
             case EDITTEXT:
                 EditTextHolder editTextHolder = (EditTextHolder) holder;
+                editTextHolder.getAnswer().addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        handler.EditTextListener(position, s.toString());
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
                 setupEditTextHolder (editTextHolder, position);
                 break;
             case RADIOGROUP:
                 RadioCheckHolder radioCheckHolder = (RadioCheckHolder) holder;
+                radioCheckHolder.getOptionsGroup().setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+
+                    }
+                });
                 setupRadioCheckHolder (radioCheckHolder, position);
         }
     }
@@ -95,13 +128,16 @@ public class FeedbackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void setupRadioCheckHolder(RadioCheckHolder radioCheckHolder, int position) {
         RadioType type = (RadioType) data.get(position);
         RadioGroup optionsGroup = radioCheckHolder.getOptionsGroup();
-        //ArrayList<RadioButton> options = new ArrayList<>(type.getOptions().size());
+        RadioGroup.LayoutParams layoutParams;
+
         if (type != null) {
             radioCheckHolder.getQuestion().setText(type.getQuestions());
             for (String option:type.getOptions()) {
                 RadioButton button = new RadioButton(context);
                 button.setText(option);
-                optionsGroup.addView(button);
+                layoutParams = new RadioGroup.LayoutParams(RecyclerView.LayoutParams.WRAP_CONTENT, RecyclerView.LayoutParams.WRAP_CONTENT);
+                button.setPadding(10, 10, 10, 10);
+                optionsGroup.addView(button, layoutParams);
             }
         }
     }

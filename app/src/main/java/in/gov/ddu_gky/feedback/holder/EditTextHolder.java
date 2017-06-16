@@ -27,8 +27,8 @@ public class EditTextHolder extends RecyclerView.ViewHolder {
         this.question.setText(question);
     }
 
-    public String getAnswer () {
-        return this.answer.getText().toString();
+    public EditText getAnswer () {
+        return this.answer;
     }
 
     public TextView getQuestion () {

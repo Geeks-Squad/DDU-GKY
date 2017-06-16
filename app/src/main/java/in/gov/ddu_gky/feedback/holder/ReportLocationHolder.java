@@ -13,10 +13,16 @@ import in.gov.ddu_gky.R;
 
 public class ReportLocationHolder extends RecyclerView.ViewHolder{
 
-    Button locationButton;
+    private Button locationButton;
 
     public ReportLocationHolder(View itemView) {
         super(itemView);
         locationButton = (Button) itemView.findViewById(R.id.location_button);
     }
+
+
+    public Button getLocationButton() {
+        return locationButton;
+    }
+
 }
